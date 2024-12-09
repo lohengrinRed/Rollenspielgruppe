@@ -4,63 +4,101 @@
 \usepackage[T1]{fontenc}
 
 \usepackage[letterpaper,
-            top=2cm,
-            bottom=2cm,
-            left=3cm,
-            right=3cm,
-            marginparwidth=1.75cm]
-            {geometry}
+top=2cm,
+bottom=2cm,
+left=3cm,
+right=3cm,
+marginparwidth=1.75cm]
+{geometry}
 
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
+\definecolor{gray}{gray}{0.9}
+\definecolor{cyan}{rgb}{0.88, 1, 1} % Light cyan (RGB values can be adjusted)
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\setlength{\arrayrulewidth}{1pt}
 
 \usepackage[most]{tcolorbox}
-
-\definecolor{cyan}{rgb}{0.88, 1, 1} % Light cyan (RGB values can be adjusted)
-\pagecolor{cyan}
-
 \newtcolorbox{mycolorbox}{
-    enhanced,
-    breakable,
-    colback=white,
-    colbacktitle=white,
-    coltitle=black,
-    fonttitle=\bfseries,
-    boxrule=1pt,
-    arc=0pt,
-    outer arc=0pt,
-    colframe=black,
-}
+  enhanced,
+  breakable,
+  colback=white,
+  colbacktitle=white,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=0pt,
+  outer arc=0pt,
+  colframe=black,
+  }
 
-\begin{document}
+  \pagecolor{cyan}
+  \begin{document}
 
-\begin{mycolorbox}
-      \textbf{Name}: Lohengrin\\
-      \textbf{Rasse}: Mittelländerin \hfill \textbf{Kultur} Zyklopeninseln\\
-      \textbf{Profession}: Ingerimm, Traditioneller Kult; Bruderschaft des Lodernden Feuers
-\end{mycolorbox}
+  \begin{mycolorbox}
+    \textbf{Name}: Lohengrin\\
+    \textbf{Rasse}: Mittelländerin \hfill \textbf{Kultur} Zyklopeninseln\\
+    \textbf{Profession}: Ingerimm, Traditioneller Kult; Bruderschaft des Lodernden Feuers
+  \end{mycolorbox}
 
-\begin{mycolorbox}
-	\textbf{Vorteile}:
-	\begin{itemize}
-		\item[-] Eisern
-		\item[-] Geweiht [Zwölfgöttliche Kirche]
-		\item[-] Herrausrangende Eigenschaft: \textit{Intuition}
-		\item[-] Prophezeien
-	\end{itemize}
-	\textbf{Nachteile}:
-	\begin{itemize}
-		\item[-] Moralkodex \textit{Ingerimm}
-		\item[-] Neugier 5
-		\item[-] Verpflichtungen \textit{Kirche} und \textit{Orden}
-		\item[-] Vorurteile \textit{Orks} 6
-		\item[-] Weltfremd bzgl. \textit{Städtischem Treiben} 5
-	\end{itemize}
-	\textbf{Profane Sonderfertigkeiten}
-	\begin{itemize}
-		\item[-] Kulturkunde \textit{Zyklopeninseln}
-		\item[-] Meister der Improvisation
-	\end{itemize}
-\end{mycolorbox}
+  \begin{mycolorbox}
+    \textbf{Vorteile}:
+    \begin{itemize}
+      \item[-] Eisern
+      \item[-] Geweiht [Zwölfgöttliche Kirche]
+      \item[-] Herrausrangende Eigenschaft: \textit{Intuition}
+      \item[-] Prophezeien
+    \end{itemize}
+    \textbf{Nachteile}:
+    \begin{itemize}
+      \item[-] Moralkodex \textit{Ingerimm}
+      \item[-] Neugier 5
+      \item[-] Verpflichtungen \textit{Kirche} und \textit{Orden}
+      \item[-] Vorurteile \textit{Orks} 6
+      \item[-] Weltfremd bzgl. \textit{Städtischem Treiben} 5
+    \end{itemize}
+    \textbf{Profane Sonderfertigkeiten}
+    \begin{itemize}
+      \item[-] Kulturkunde \textit{Zyklopeninseln}
+      \item[-] Meister der Improvisation
+    \end{itemize}
+  \end{mycolorbox}
+
+  \begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|X|cc|c|X|cc|c|}
+      \hline
+      \rowcolor{gray}\emph{Eigenschaften}& Mod& Start & Aktuell & \emph{Eigenschaften}& Mod& Start & Aktuell\\
+      \rowcolor{white}\emph{Mut}& 0& 14& 14&
+      \emph{Klugheit}& 0& 12& 12\\
+      \rowcolor{white}\emph{Intuition}& 1& 14& 15&
+      \emph{Charisma}& 0& 14& 14\\
+      \rowcolor{white}\emph{Fingerfertigkeit}& 0& 12& 12&
+      \emph{Gewandheit}& 0& 10& 10\\
+      \rowcolor{white}\emph{Konstitution}& 0& 12& 12&
+      \emph{Körperkraft}& 0& 12& 12\\
+      \rowcolor{white}\emph{Sozialstatus}& 0& 7& 7&
+      \emph{Geschwidigkeit}& 0& 7& 7\\	
+      \hline
+    \end{tabularx} 
+    \vspace{1cm}
+    \begin{tabularx}{0.65\textwidth}{|X|cc|c|cc|}
+      \hline
+      \rowcolor{gray}\emph{Basiswert}& Mod& Start& Aktuell& Gekauft& Rest\\
+      \rowcolor{white}\emph{Lebenspunkte}& 10& 18& 28& 0& 6\\
+      \rowcolor{white}\emph{Ausdauer}& 10& 18& 28& 0& 6\\
+      %\rowcolor{white}\emph{Astralenergie}& & & & & \\
+      \rowcolor{white}\emph{Karmalenergie}& 24& & 24& 0& \\
+      \rowcolor{white}\emph{Magieresistenz}&-3&  8&  5& 0& 7\\
+      \rowcolor{white}\emph{INI-Basis}& 0& 10& 11&  &  \\ 
+      \rowcolor{white}\emph{AT-Basiswert}& 0&  7&  7&  &  \\
+      \rowcolor{white}\emph{PA-Basiswert}& 0&  7&  7&  &  \\
+      \rowcolor{white}\emph{FK-Basiswert}& 0&  8&  8&  &  \\
+      \rowcolor{white}\emph{Wundschwelle}&  &  6&  8&  &  \\
+      \hline
+    \end{tabularx}
+  \end{table}
 
 \end{document}
 
