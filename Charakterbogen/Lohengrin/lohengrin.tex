@@ -34,8 +34,17 @@ marginparwidth=1.75cm]
   colframe=black,
   }
 
-  \pagecolor{cyan}
-  \begin{document}
+\newcommand{\MU}{14}
+\newcommand{\KL}{12}
+\newcommand{\IN}{15}
+\newcommand{\CH}{14}
+\newcommand{\FF}{12}
+\newcommand{\GE}{10}
+\newcommand{\KO}{12}
+\newcommand{\KK}{12}
+
+\pagecolor{cyan}
+\begin{document}
 
   %Kopfdaten
   \begin{mycolorbox}
@@ -116,36 +125,40 @@ marginparwidth=1.75cm]
   % Page 2
   % Grundeigenschaften
   \begin{mycolorbox}
-    \begin{tabbing}
-      \hspace{0.1\textwidth} \=
-      \hspace{0.1\textwidth} \=
-      \hspace{0.1\textwidth} \=
-      \hspace{0.1\textwidth} \=
-      \hspace{0.1\textwidth} \=
-      \hspace{0.1\textwidth} \=
-      \hspace{0.1\textwidth} \=
-      \hspace{0.2\textwidth} \=
-      \kill
-      \textbf{MU}: 14\> 
-      \textbf{KL}: 12\> 
-      \textbf{IN}: 15\> 
-      \textbf{CH}: 14\> 
-      \textbf{FF}: 12\> 
-      \textbf{GE}: 10\> 
-      \textbf{KO}: 12\> 
-      \textbf{KK}: 12\> 
-      \textbf{BE}: 0
+      \begin{tabbing}
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.2\textwidth} \=
+        \kill
+        \textbf{MU}: \MU\> 
+        \textbf{KL}: \KL\> 
+        \textbf{IN}: \IN\> 
+        \textbf{CH}: \CH\> 
+        \textbf{FF}: \FF\> 
+        \textbf{GE}: \GE\> 
+        \textbf{KO}: \KO\> 
+        \textbf{KK}: \KK\> 
+        \textbf{BE}: 0
     \end{tabbing}
   \end{mycolorbox}
-
+  
   %Talente
-  \begin{table}
+  \begin{table}[ht]
     \centering
     \begin{tabularx}{0.8\linewidth}{|Xclcc|c|}
       \hline
       \rowcolor{gray}\multicolumn{5}{|l|}{Gabe (F)}&TaW\\
       \rowcolor{white} Prophezeien (IN/IN/CH) &&&&& 5\\
       \rowcolor{white} LK (Ingerimm) (MU/IN/CH) &&&&& 9\\
+      \hline
+    \end{tabularx}
+    \centering
+    \begin{tabularx}{0.8\linewidth}{|Xclcc|c|}
       \hline
       \rowcolor{gray} \multicolumn{2}{|l}{Kampftechniken}& BE & AT & PA &TaW\\ 
       \rowcolor{white}Dolche& D& BE-1& 7& 8& 1 \\
@@ -157,22 +170,111 @@ marginparwidth=1.75cm]
       \rowcolor{white}Schwerter&E&BE-2&9&9&4\\ 
       \rowcolor{white}Wurfmesser&C&BE-3&8&&0\\
       \hline
-      \rowcolor{gray} \multicolumn{4}{|l}{Körperliche Talente(D)}& BE &TaW\\
-      \rowcolor{white} \multicolumn{4}{|l}{Athletik (GE/KO/KK)}& BE$\times$2 & 1\\
-      \rowcolor{white} \multicolumn{4}{|l}{Klettern (MU/GE/KK)}& BE$\times$2 & 1\\
-      \rowcolor{white} \multicolumn{4}{|l}{Körperbeherrschung (MU/IN/GE)} & BE$\times$2& 2\\
-      \rowcolor{white} \multicolumn{4}{|l}{Schleichen (MU/IN/GE)} & BE& 0\\
-      \rowcolor{white} \multicolumn{4}{|l}{Schwimmen (GE/KO/KK)} & BE$\times$2& 2\\
-      \rowcolor{white} \multicolumn{4}{|l}{Selbstbeherrschung (MU/KO/KK)}& & 3\\
-      \rowcolor{white} \multicolumn{4}{|l}{Sich Verstecken (MU/IN/GE)}&  BE-2&0\\
-      \rowcolor{white} \multicolumn{4}{|l}{Singen (IN/CH/CH)}& BE-3& 1\\
-      \rowcolor{white} \multicolumn{4}{|l}{Sinnenschärfe (KL/IN/IN)}& \emph{ML}&2\\
-      \rowcolor{white} \multicolumn{4}{|l}{Tanzen (CH/GE/GE)}& BE$\times$2&1\\
-      \rowcolor{white} \multicolumn{4}{|l}{Zechen (IN/KO/KK)}& & 0\\
+    \end{tabularx}
+    \centering
+    \begin{tabularx}{0.8\linewidth}{|Xc|c|}
+      \hline
+      \rowcolor{gray}  Körperliche Talente (D)& BE &TaW\\
+      \rowcolor{white} Athletik (GE/KO/KK)& BE$\times$2 & 1\\
+      \rowcolor{white} Klettern (MU/GE/KK)& BE$\times$2 & 1\\
+      \rowcolor{white} Körperbeherrschung (MU/IN/GE) & BE$\times$2& 2\\
+      \rowcolor{white} Schleichen (MU/IN/GE) & BE& 0\\
+      \rowcolor{white} Schwimmen (GE/KO/KK) & BE$\times$2& 2\\
+      \rowcolor{white} Selbstbeherrschung (MU/KO/KK)& & 3\\
+      \rowcolor{white} Sich Verstecken (MU/IN/GE)&  BE-2&0\\
+      \rowcolor{white} Singen (IN/CH/CH)& BE-3& 1\\
+      \rowcolor{white} Sinnenschärfe (KL/IN/IN)& \emph{ML}&2\\
+      \rowcolor{white} Tanzen (CH/GE/GE)& BE$\times$2&1\\
+      \rowcolor{white} Zechen (IN/KO/KK)& & 0\\
+      \hline
+    \end{tabularx}
+    \centering
+    \begin{tabularx}{0.8\linewidth}{|Xclcc|c|}
+      \hline
+      \rowcolor{gray} \multicolumn{5}{|l|}{Gesellschaft (B)} & TaW\\
+      \rowcolor{white} Etikette (KL/IN/CH) &&&&&2\\
+      \rowcolor{white} Lehren (KL/IN/CH) &&&&&5\\
+      \rowcolor{white} Menschenkenntnis (KL/IN/CH) &&&&&4\\
+      \rowcolor{white} Überreden (MU/IN/CH) &&&&&0\\
+      \rowcolor{white} Überzeugen (KL/IN/CH) &&&&&4\\
+      \hline
+    \end{tabularx}
+    \centering
+    \begin{tabularx}{0.8\linewidth}{|Xclcc|c|}
+      \hline
+      \rowcolor{gray} \multicolumn{5}{|l|}{Natur (B)} & TaW\\
+      \rowcolor{white} Fährtensuchen (KL/IN/KO) &&&&&1\\
+      \rowcolor{white} Fesseln/Entfesseln (FF/GE/KK) &&&&&1\\
+      \rowcolor{white} Fischen/Angeln (IN/FF/KK) &&&&&1\\
+      \rowcolor{white} Orientierung (KL/IN/IN) &&&&&1\\
+      \rowcolor{white} Wettervorhersage (KL/IN/IN) &&&&&1\\
+      \rowcolor{white} Wildnisleben (IN/GE/KO) &&&&&0\\
       \hline
     \end{tabularx}
   \end{table}
+ 
+  \clearpage
+  \begin{mycolorbox}
+      \begin{tabbing}
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.1\textwidth} \=
+        \hspace{0.2\textwidth} \=
+        \kill
+        \textbf{MU}: \MU\> 
+        \textbf{KL}: \KL\> 
+        \textbf{IN}: \IN\> 
+        \textbf{CH}: \CH\> 
+        \textbf{FF}: \FF\> 
+        \textbf{GE}: \GE\> 
+        \textbf{KO}: \KO\> 
+        \textbf{KK}: \KK\> 
+        \textbf{BE}: 0
+    \end{tabbing}
+  \end{mycolorbox}
 
-
+  \begin{table}[ht]
+    \centering
+    \begin{tabularx}{0.8\linewidth}{|Xclcc|c|}
+      \hline
+      \rowcolor{gray} \multicolumn{5}{|l|}{Wissen (B)} & TaW\\
+      \rowcolor{white} Baukunst (KL/KL/FF) &&&&&5\\
+      \rowcolor{white} Geschichtswissen (KL/KL/IN) &&&&&7\\
+      \rowcolor{white} Gesteinskunde (KL/IN/FF) &&&&&4\\
+      \rowcolor{white} Götter und Kulte (KL/KL/IN) &&&&&7\\
+      \rowcolor{white} Hüttenkunde (KL/IN/KO) &&&&&6\\
+      \rowcolor{white} Mechanik (KL/KL/FF) &&&&&2\\
+      \rowcolor{white} Philosophie (KL/KL/IN) &&&&&1\\
+      \rowcolor{white} Rechnen (KL/KL/IN) &&&&&5\\
+      \rowcolor{white} Rechtskunde (KL/KL/IN) &&&&&10\\
+      \rowcolor{white} Sagen oder Legenden (KL/KL/CH) &&&&&4\\
+      \rowcolor{white} Schätzen (KL/IN/IN) &&&&&5\\
+      \hline
+    \end{tabularx}
+    \centering
+    \begin{tabularx}{0.8\linewidth}{|Xclcc|c|}
+      \hline
+      \rowcolor{gray} \multicolumn{5}{|l|}{Handwerk (B)} & TaW\\
+      \rowcolor{white} Alchimie (MU/KL/FF) &&&&&4\\
+      \rowcolor{white} Boote fahren (GE/KO/KK) &&&&&1\\
+      \rowcolor{white} Grobschmied (FF/KO/KK) &&&&&7\\
+      \rowcolor{white} Heilkunde: Wunden (KL/CH/FF) &&&&&0\\
+      \rowcolor{white} Holzbearbeitung  (KL/FF/KK) (*Schnitzen) &&&&&5\\
+      \rowcolor{white} Kochen (KL/IN/FF) &&&&&0\\
+      \rowcolor{white} Lederarbeiten (KL/FF/FF) &&&&&5\\
+      \rowcolor{white} Malen oder Zeichnen (KL/CH/FF) &&&&&4\\
+      \rowcolor{white} Schneidern (KL/CH/FF) &&&&&0\\
+      \rowcolor{white} Seefahrt (FF/GE/KK) &&&&&1\\
+      \rowcolor{white} Seiler (FF/FF/KK) &&&&&2\\
+      \rowcolor{white} Viehzucht (KL/IN/KK) &&&&&1\\
+      \rowcolor{white} Zimmermann (KL/FF/KK) &&&&&2\\
+      \hline
+    \end{tabularx}
+  \end{table}
 \end{document}
 
+% 20
