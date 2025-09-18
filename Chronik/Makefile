@@ -10,11 +10,14 @@ all: pdf
 
 # Rule to generate the PDF
 pdf: $(TEXSRC)
-	$(PDFLATEX) $(TEXSRC)
+	$(PDFLATEX) -interaction=nonstopmode -halt-on-error $(TEXSRC)
+	if grep -q "Rerun to get" $(TEXFILE).log; then \
+		$(PDFLATEX) -interaction=nonstopmode -halt-on-error $(TEXSRC) >/dev/null; \
+	fi
 
 # Clean up auxiliary files
 clean:
-	rm -f $(TEXFILE).aux $(TEXFILE).log 
+	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).toc $(TEXFILE).out
 
 # Clean everything, including the PDF
 cleanall: clean
