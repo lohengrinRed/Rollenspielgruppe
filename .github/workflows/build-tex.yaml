@@ -94,7 +94,9 @@ jobs:
         if: steps.tex.outputs.none == 'false'
         run: |
           export GIT_SEQUENCE_EDITOR=true
-          git rebase -i --autosquash --root
+          BRANCH="${GITHUB_REF_NAME}"
+          git fetch origin "$BRANCH"
+          git rebase -i --autosquash "origin/$BRANCH"
 
       - name: Push changes
         if: steps.tex.outputs.none == 'false'
