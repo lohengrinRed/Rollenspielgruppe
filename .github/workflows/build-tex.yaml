@@ -1,0 +1,101 @@
+name: Build TeX and autosquash PDF
+
+on:
+  push:
+    paths:
+      - '**/*.tex'
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            latexmk
+
+      - name: Find changed TeX files
+        id: tex
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
+            | grep '\.tex$' > tex_files.txt || true
+
+          if [ ! -s tex_files.txt ]; then
+            echo "none=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "none=false" >> $GITHUB_OUTPUT
+
+      - name: Verify Makefile exists (hard fail)
+        if: steps.tex.outputs.none == 'false'
+        run: |
+          while read texfile; do
+            DIR=$(dirname "$texfile")
+            if [ ! -f "$DIR/Makefile" ]; then
+              echo "::error file=$texfile::Missing Makefile in $DIR"
+              exit 1
+            fi
+          done < tex_files.txt
+
+      - name: Build PDFs
+        if: steps.tex.outputs.none == 'false'
+        run: |
+          while read texfile; do
+            DIR=$(dirname "$texfile")
+            echo "Building in $DIR"
+
+            pushd "$DIR"
+            make
+            make
+            popd
+          done < tex_files.txt
+
+      - name: Commit PDFs with --fixup
+        if: steps.tex.outputs.none == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          while read texfile; do
+            DIR=$(dirname "$texfile")
+            BASENAME=$(basename "$texfile" .tex)
+
+            # Find commit that changed this .tex file
+            TARGET_COMMIT=$(git log -n 1 --pretty=format:%H -- "$texfile")
+
+            # Add PDFs from that directory only
+            git add "$DIR"/*.pdf
+
+            if git diff --cached --quiet; then
+              echo "No PDF changes for $texfile"
+              continue
+            fi
+
+            git commit --fixup="$TARGET_COMMIT"
+          done < tex_files.txt
+
+      - name: Autosquash rebase
+        if: steps.tex.outputs.none == 'false'
+        run: |
+          git rebase -i --autosquash --root
+
+      - name: Push changes
+        if: steps.tex.outputs.none == 'false'
+        run: |
+          git push --force-with-lease
+
