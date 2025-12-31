@@ -53,7 +53,7 @@ jobs:
         id: tex
         run: |
           git fetch origin main
-          files=$(git diff --name-only origin/main...HEAD -- '*.tex' || true)
+          files=$(git diff --name-only origin/main...HEAD | grep '\.tex$' || true)
           echo "files<<EOF" >> $GITHUB_OUTPUT
           echo "$files" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
