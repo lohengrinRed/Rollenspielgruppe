@@ -1,110 +1,82 @@
-name: Build TeX and autosquash PDF
+name: build-pdf
 
 on:
   push:
+    branches: [main]
     paths:
       - '**/*.tex'
 
-jobs:
-  build-pdf:
-    # Safety guard 1: never run on commits created by GitHub Actions itself
-    if: github.actor != 'github-actions[bot]'
+concurrency:
+  group: build-pdf-main
+  cancel-in-progress: true
 
+permissions:
+  contents: write
+
+jobs:
+  build:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Configure git
+        run: |
+          git config user.name "pdf-bot"
+          git config user.email "pdf-bot@users.noreply.github.com"
+
+      - name: Cache TeX Live
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/share/texlive
+            /var/lib/texmf
+            ~/.texlive
+          key: texlive-${{ runner.os }}-2026
+
       - name: Install LaTeX
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-lang-german \
-            latexmk
+          if [ ! -d /usr/share/texlive ]; then
+            sudo apt-get update
+            sudo apt-get install -y \
+              texlive-latex-base \
+              texlive-latex-recommended \
+              texlive-latex-extra \
+              texlive-fonts-recommended \
+              texlive-lang-german
+          fi
 
-      - name: Find changed TeX files
+      - name: Detect changed tex files
         id: tex
         run: |
-          # Safety guard 2: skip commits explicitly marked [skip ci]
-          if git log -1 --pretty=%B | grep -qi '\[skip ci\]'; then
-            echo "none=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
-            | grep '\.tex$' > tex_files.txt || true
-
-          if [ ! -s tex_files.txt ]; then
-            echo "none=true" >> $GITHUB_OUTPUT
-          else
-            echo "none=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Verify Makefile exists (hard fail)
-        if: steps.tex.outputs.none == 'false'
-        run: |
-          while read texfile; do
-            DIR=$(dirname "$texfile")
-            if [ ! -f "$DIR/Makefile" ]; then
-              echo "::error file=$texfile::Missing Makefile in $DIR"
-              exit 1
-            fi
-          done < tex_files.txt
+          git fetch origin main
+          files=$(git diff --name-only origin/main...HEAD | grep '\.tex$' || true)
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Build PDFs
-        if: steps.tex.outputs.none == 'false'
+        if: steps.tex.outputs.files != ''
         run: |
-          while read texfile; do
-            DIR=$(dirname "$texfile")
-            echo "Building in $DIR"
-            pushd "$DIR"
-            make
-            popd
-          done < tex_files.txt
+          set -e
+          for f in ${{ steps.tex.outputs.files }}; do
+            make TEX="$f"
+          done
 
-      - name: Commit PDFs with --fixup
-        if: steps.tex.outputs.none == 'false'
+      - name: Commit PDFs
+        if: steps.tex.outputs.files != ''
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add '*.pdf'
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit --fixup=HEAD
 
-          while read texfile; do
-            DIR=$(dirname "$texfile")
-
-            TARGET_COMMIT=$(git log -n 1 --pretty=format:%H -- "$texfile")
-
-            git add "$DIR"/*.pdf
-
-            if git diff --cached --quiet; then
-              echo "No PDF changes for $texfile"
-              continue
-            fi
-
-            git commit --fixup="$TARGET_COMMIT"
-          done < tex_files.txt
-
-      - name: Autosquash rebase (since upstream)
-        if: steps.tex.outputs.none == 'false'
+      - name: Rebase and push
+        if: steps.tex.outputs.files != ''
         run: |
-          export GIT_SEQUENCE_EDITOR=true
-
-          BRANCH="${GITHUB_REF_NAME}"
-          git fetch origin "$BRANCH"
-
-          git rebase -i --autosquash "origin/$BRANCH"
-
-      - name: Push changes
-        if: steps.tex.outputs.none == 'false'
-        run: |
-          git push --force-with-lease
-
+          git rebase origin/main --autosquash --autostash
+          git push --force origin HEAD:main
