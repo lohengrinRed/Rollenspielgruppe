@@ -11,6 +11,7 @@
 |Josef|Landwirt|Der junge Viehtreiber lebt in Edfu und besucht regelmäßig den Schrein des Potenzials.|
 |Oz|Gelehrer|_|
 |Ebichar und Morxes|Geschäftsleute|Das Tiefling paar betreibt einen Laden der exotische Tier(-Produkt)e handelt. Sie treten sehr gut betucht aber volksnah auf.|
+|Farqen|Geschäftsmann|Der Firbolg Werkmeister betreibt einen Magieladen in Edfu. Er liebt Tiere und plaudert gerne mit seinen Gästen.|
 
 
 ## Pulvar
