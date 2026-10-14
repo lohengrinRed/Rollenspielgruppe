@@ -35,6 +35,6 @@
 |Eric|Marine Kapitän|Der ehemalige Kadett von Vize-Admiral Rahnar, hat eine vorstellung von Gerechtigkeit die über das Recht hinweg geht. Er versucht immer für das Volk zu handeln.|
 |Avia Korinthios|Gouvaneur von Debod|Der zwei meter große Mann tritt bürgernah und reformoffen auf. Er hat sich den Kampf gegen die Drogenkriminalität verschrieben.|
 |Joel Kovetz|President von Dongo|_|
-|Rahnar|Vize-Admiral|Der abenteuerlustige Vizeadmiral ist die Wache über Dongo anvertraut. Er liebt es Piraten hinterher zu Jagen und ist durch sein Humor bekannt.|
+|Rothgar|Vize-Admiral|Der abenteuerlustige Vizeadmiral ist die Wache über Dongo anvertraut. Er liebt es Piraten hinterher zu Jagen und ist durch sein Humor bekannt.|
 
 
