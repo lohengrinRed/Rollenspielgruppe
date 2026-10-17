@@ -2,6 +2,7 @@
 |Name|Berufung|Kurze Beschreibung|
 |----|--------|------------------|
 |Aethelstan| Leiterin, Amt für kulturelle Schönheit| _ |
+|Kumaran|Schamane vom Nebelstamm| _ |
 |Adam _ |_ |_ |
 
 
@@ -24,7 +25,7 @@
 |Binah|Cheflogistikerin|Die gutaussehende Mitte-Zwanzigerin ist Cheflogistikerin für ein Treuhandunternehmen und hat durch ihre Sorgfalt einen guten Namen.|
 |Tamar|Händler|Der Stoffhändler im Bazar verdient sich durch den Verkauf anderer Stoffe gerne ein paar Silber dazu.|
 |Daniel|Fuhrmann|Der Familienvater wurde vor kurzem Gefangengenommen, da er beim Schmuggel illegaler Substanzen verwickelt war.|
-
+|
 
 ## Politiker und Amtsträger Dongos
 |Name|Berufung|Kurze Beschreibung|
